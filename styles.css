@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+}
+
+body {
+  margin: 2rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button {
+  font-family: "Poppins", sans-serif;
+  font-size: inherit;
+  background-color: blueviolet;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+  height: 35rem;
+  overflow-y: scroll;
+}
+
+.list_child {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.list_child p {
+  width: 12%;
+  word-wrap: break-word;
+}
+
+.update_btn {
+  background-color: blueviolet;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: inherit;
+  border-radius: 10px;
+  border: 0px;
+  height: 2rem;
+  width: auto;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.delete_btn {
+  background-color: red;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: inherit;
+  border-radius: 10px;
+  border: 0px;
+  height: 2rem;
+  width: auto;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.button:hover {
+  box-shadow: 5px 5px 10px 2px rgba(139, 139, 139, 0.8);
+}
