@@ -14,13 +14,15 @@ body {
   justify-content: space-between;
 }
 
-.button {
+button {
   font-family: "Poppins", sans-serif;
   font-size: inherit;
+  width: auto;
+  height: auto;
   background-color: blueviolet;
   color: white;
   padding: 0.5rem;
-  border-radius: 10px;
+  border-radius: 5px;
   border: 0;
 }
 
@@ -38,6 +40,9 @@ body {
   justify-content: space-between;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  align-items: center;
+  padding: 10px;
+  height: auto;
 }
 
 .list_child p {
@@ -45,32 +50,32 @@ body {
   word-wrap: break-word;
 }
 
+dialog {
+  margin: auto;
+}
+
+.serial_no {
+  width: 5%;
+}
+
 .update_btn {
   background-color: blueviolet;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-size: inherit;
-  border-radius: 10px;
   border: 0px;
-  height: 2rem;
-  width: auto;
   padding-top: 2px;
   padding-bottom: 2px;
 }
 
 .delete_btn {
   background-color: red;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  font-size: inherit;
-  border-radius: 10px;
   border: 0px;
-  height: 2rem;
-  width: auto;
   padding-top: 2px;
   padding-bottom: 2px;
 }
 
 .button:hover {
   box-shadow: 5px 5px 10px 2px rgba(139, 139, 139, 0.8);
+}
+
+::backdrop {
+  opacity: 1;
 }
