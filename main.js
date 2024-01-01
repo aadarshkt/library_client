@@ -149,6 +149,7 @@ const handle_delete_book = async (id) => {
     }
     console.log("Book deleted successfully", await response.json());
   } catch (err) {
+    alert("Database hosting is costly");
     console.error(err);
   }
 };
@@ -171,6 +172,7 @@ const handle_update_book = async ({ id, title, author, year_published, ISBN }) =
     }
     console.log("Book updated successfully", await response.json());
   } catch (err) {
+    alert("Database hosting is costly");
     console.error(err);
   }
 };
@@ -194,6 +196,7 @@ const handle_create_book = async ({ title, author, year_published, ISBN }) => {
       throw new Error("Error creating book", result);
     }
   } catch (err) {
+    alert("Database hosting is costly");
     console.error(err);
   }
 };
