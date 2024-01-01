@@ -2,16 +2,50 @@ const fetchPromise = fetch("http://localhost:8080/api/books");
 const list_div = document.getElementsByClassName("list");
 
 //dialog return value
-//delete dialog button
 const delete_dialog = document.getElementById("delete_dialog");
 
 //no button on delete dialog button
 const no_delete_dialog = delete_dialog.querySelector("#no_delete_dialog");
-no_delete_dialog.addEventListener("click", () => delete_dialog.close("No"));
+no_delete_dialog.addEventListener("click", () => delete_dialog.close());
 
-//yes button
+//yes button on delete dialog button
 const yes_delete_dialog = delete_dialog.querySelector("#yes_delete_dialog");
 yes_delete_dialog.addEventListener("click", () => delete_dialog.close("Yes"));
+
+//update dialog
+const create_update_dialog = document.getElementById("create_update_dialog");
+create_update_dialog
+  .querySelector("#yes_create_update_dialog")
+  .addEventListener("click", () => create_update_dialog.close("Yes"));
+create_update_dialog
+  .querySelector("#no_create_update_dialog")
+  .addEventListener("click", () => create_update_dialog.close());
+
+const title_input = create_update_dialog.querySelector("#update_title_holder");
+const author_input = create_update_dialog.querySelector("#update_author_holder");
+const year_published_input = create_update_dialog.querySelector("#update_year_holder");
+const ISBN_input = create_update_dialog.querySelector("#update_ISBN_holder");
+
+//handle new book creation
+const create_button = document.getElementById("create_button");
+create_button.addEventListener("click", () => {
+  create_update_dialog.showModal();
+
+  const dialog_close_handler = () => {
+    if (create_update_dialog.returnValue === "Yes") {
+      const new_book = {
+        title: title_input.value,
+        author: author_input.value,
+        year_published: year_published_input.value,
+        ISBN: ISBN_input.value,
+      };
+      handle_create_book(new_book);
+      create_update_dialog.removeEventListener("close", dialog_close_handler);
+    }
+  };
+
+  create_update_dialog.addEventListener("close", dialog_close_handler);
+});
 
 fetchPromise
   .then((response) => response.json())
@@ -55,6 +89,32 @@ function appendChild(data) {
     update_button.textContent = "Update";
     list_cild.appendChild(update_button);
 
+    //listen for update events
+    update_button.addEventListener("click", () => {
+      create_update_dialog.showModal();
+
+      //fill book details in dialog box.
+      title_input.value = data[i].title;
+      author_input.value = data[i].author;
+      year_published_input.value = data[i].year_published;
+      ISBN_input.value = data[i].ISBN;
+
+      const dialog_close_handler = () => {
+        if (create_update_dialog.returnValue === "Yes") {
+          const new_book = {
+            title: title_input.value,
+            author: author_input.value,
+            year_published: year_published_input,
+            ISBN: ISBN_input.value,
+          };
+          handle_update_book(new_book);
+          create_update_dialog.removeEventListener("close", dialog_close_handler);
+        }
+      };
+      //handle close and get data from dialog box
+      create_update_dialog.addEventListener("close", dialog_close_handler);
+    });
+
     //delete button
     const delete_button = document.createElement("button");
     delete_button.classList.add("delete_btn");
@@ -82,4 +142,13 @@ function appendChild(data) {
 
 const handle_delete_book = (id) => {
   console.log(id);
+};
+
+const handle_update_book = ({ title, author, year_published, ISBN }) => {
+  console.log(title);
+  console.log(ISBN);
+};
+
+const handle_create_book = ({ title, author, year_published, ISBN }) => {
+  console.log(title, author, year_published, ISBN);
 };
