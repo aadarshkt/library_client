@@ -102,9 +102,10 @@ function appendChild(data) {
       const dialog_close_handler = () => {
         if (create_update_dialog.returnValue === "Yes") {
           const new_book = {
+            id: data[i].id,
             title: title_input.value,
             author: author_input.value,
-            year_published: year_published_input,
+            year_published: year_published_input.value,
             ISBN: ISBN_input.value,
           };
           handle_update_book(new_book);
@@ -125,9 +126,9 @@ function appendChild(data) {
     delete_button.addEventListener("click", () => {
       delete_dialog.showModal();
 
-      const dialog_close_handler = () => {
+      const dialog_close_handler = async () => {
         if (delete_dialog.returnValue === "Yes") {
-          handle_delete_book(data[i].id);
+          await handle_delete_book(data[i].id);
           delete_dialog.removeEventListener("close", dialog_close_handler);
         }
       };
@@ -140,15 +141,59 @@ function appendChild(data) {
   }
 }
 
-const handle_delete_book = (id) => {
-  console.log(id);
+const handle_delete_book = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:8080/api/books?id=${id}`, { method: "DELETE" });
+    if (!response.ok) {
+      throw new Error("Error deleting the book");
+    }
+    console.log("Book deleted successfully", await response.json());
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-const handle_update_book = ({ title, author, year_published, ISBN }) => {
-  console.log(title);
-  console.log(ISBN);
+const handle_update_book = async ({ id, title, author, year_published, ISBN }) => {
+  const new_book = {
+    title: title,
+    author: author,
+    year_published: parseInt(year_published),
+    ISBN: ISBN,
+  };
+  try {
+    const response = await fetch(`http://localhost:8080/api/books?id=${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(new_book),
+    });
+    if (!response.ok) {
+      throw new Error("Error updating the book");
+    }
+    console.log("Book updated successfully", await response.json());
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-const handle_create_book = ({ title, author, year_published, ISBN }) => {
-  console.log(title, author, year_published, ISBN);
+const handle_create_book = async ({ title, author, year_published, ISBN }) => {
+  const new_book = {
+    title: title,
+    author: author,
+    year_published: parseInt(year_published),
+    ISBN: ISBN,
+  };
+  try {
+    const response = await fetch(`http://localhost:8080/api/books`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(new_book),
+    });
+    const result = await response.json();
+    console.log("Book created successfully", result);
+    if (!response.ok) {
+      throw new Error("Error creating book", result);
+    }
+  } catch (err) {
+    console.error(err);
+  }
 };
