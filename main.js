@@ -51,7 +51,7 @@ fetchPromise
   .then((response) => response.json())
   .then((data) => appendChild(data))
   .catch((err) => {
-    alert("Thanks for coming this far but database hosting is costly!!");
+    // alert("Thanks for coming this far but database hosting is costly!!");
     console.error(err);
   });
 
