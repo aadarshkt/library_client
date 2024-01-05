@@ -1,4 +1,4 @@
-const fetchPromise = fetch("https://library-server-3i6d.onrender.com/api/books");
+const fetchPromise = fetch("https://library-server-3i6d.onrender.com/8080/api/books");
 const list_div = document.getElementsByClassName("list");
 
 //dialog return value
@@ -146,7 +146,9 @@ function appendChild(data) {
 
 const handle_delete_book = async (id) => {
   try {
-    const response = await fetch(`https://library-server-3i6d.onrender.com/api/books?id=${id}`, { method: "DELETE" });
+    const response = await fetch(`https://library-server-3i6d.onrender.com/8080/api/books?id=${id}`, {
+      method: "DELETE",
+    });
     if (!response.ok) {
       throw new Error("Error deleting the book");
     }
@@ -165,7 +167,7 @@ const handle_update_book = async ({ id, title, author, year_published, ISBN }) =
     ISBN: ISBN,
   };
   try {
-    const response = await fetch(`https://library-server-3i6d.onrender.com/api/books?id=${id}`, {
+    const response = await fetch(`https://library-server-3i6d.onrender.com/8080/api/books?id=${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(new_book),
@@ -188,7 +190,7 @@ const handle_create_book = async ({ title, author, year_published, ISBN }) => {
     ISBN: ISBN,
   };
   try {
-    const response = await fetch(`https://library-server-3i6d.onrender.com/api/books`, {
+    const response = await fetch(`https://library-server-3i6d.onrender.com/8080/api/books`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(new_book),
