@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:8080";
+const baseURL = "https://library-server-3i6d.onrender.com";
 
 const fetchPromise = fetch(`${baseURL}/api/books`);
 const list_div = document.getElementsByClassName("list");
