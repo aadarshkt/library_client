@@ -12,6 +12,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 
 button {
@@ -26,12 +27,17 @@ button {
   border: 0;
 }
 
+/* biggest div to contain all books */
 .list {
   display: flex;
   flex-direction: column;
   margin-top: 4rem;
   height: 40rem;
   overflow-y: scroll;
+}
+
+.serial_p {
+  width: 5%;
 }
 
 .list_child {
@@ -45,7 +51,19 @@ button {
   height: auto;
 }
 
-.list_child p {
+.list_child_1 {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 80px;
+  width: 100%;
+}
+
+.list_child_2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list_child_1 p {
   width: 12%;
   word-wrap: break-word;
 }
@@ -58,7 +76,6 @@ dialog {
 }
 
 .serial_no {
-  width: 5%;
 }
 
 .update_btn {
@@ -102,4 +119,25 @@ dialog {
 input {
   font-family: "Poppins", sans-serif;
   font-size: inherit;
+}
+
+/* Media query for small devices */
+
+@media (max-width: 425px) {
+  .list_child {
+    flex-direction: column;
+  }
+  .list_child_1 {
+    overflow-x: scroll;
+    margin-right: 0px;
+  }
+  .list_child_1 p {
+    width: auto;
+    margin-right: 10px;
+  }
+  .list_child_2 {
+    margin-top: 40px;
+    width: 100%;
+    justify-content: end;
+  }
 }

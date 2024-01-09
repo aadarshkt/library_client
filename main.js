@@ -60,39 +60,50 @@ fetchPromise
 function appendChild(data) {
   const len = data.length;
   for (let i = 0; i < len; i++) {
-    const list_cild = document.createElement("div");
-    list_cild.classList.add("list_child");
+    const list_child = document.createElement("div");
+    list_child.classList.add("list_child");
     if (i % 2 == 0) {
-      list_cild.style.backgroundColor = "grey";
-      list_cild.style.color = "white";
+      list_child.style.backgroundColor = "grey";
+      list_child.style.color = "white";
     }
 
+    //list_child_1
+    const list_child_1 = document.createElement("div");
+    list_child_1.classList.add("list_child_1");
+
     const serial_no = document.createElement("p");
-    serial_no.style.width = "5%";
     serial_no.textContent = `${i + 1}.`;
-    list_cild.appendChild(serial_no);
+    list_child_1.appendChild(serial_no);
 
     const title = document.createElement("p");
     title.textContent = `${data[i].title}`;
-    list_cild.appendChild(title);
+    list_child_1.appendChild(title);
 
     const author = document.createElement("p");
     author.textContent = `${data[i].author}`;
-    list_cild.appendChild(author);
+    list_child_1.appendChild(author);
 
     const year_published = document.createElement("p");
     year_published.textContent = `${data[i].year_published}`;
-    list_cild.appendChild(year_published);
+    list_child_1.appendChild(year_published);
 
     const ISBN = document.createElement("p");
     ISBN.textContent = `${data[i].ISBN}`;
-    list_cild.appendChild(ISBN);
+    list_child_1.appendChild(ISBN);
+
+    list_child.append(list_child_1);
 
     //update button
+    //div to contain to update and delete button
+    //
+    const list_child_2 = document.createElement("div");
+    list_child_2.classList.add("list_child_2");
+
     const update_button = document.createElement("button");
     update_button.classList.add("update_btn");
     update_button.textContent = "Update";
-    list_cild.appendChild(update_button);
+    update_button.style.marginRight = "15px";
+    list_child_2.appendChild(update_button);
 
     //listen for update events
     update_button.addEventListener("click", () => {
@@ -125,7 +136,7 @@ function appendChild(data) {
     const delete_button = document.createElement("button");
     delete_button.classList.add("delete_btn");
     delete_button.textContent = "Delete";
-    list_cild.appendChild(delete_button);
+    list_child_2.appendChild(delete_button);
 
     //listen for delete events.
     delete_button.addEventListener("click", () => {
@@ -142,7 +153,9 @@ function appendChild(data) {
       delete_dialog.addEventListener("close", dialog_close_handler);
     });
 
-    list_div[0].appendChild(list_cild);
+    list_child.append(list_child_2);
+
+    list_div[0].appendChild(list_child);
   }
 }
 
